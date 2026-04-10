@@ -2,6 +2,7 @@
 Tugas 3-Kelompok 8_L0324007_L0324028_L0324034
 
 #MainActivity.kt
+
 package com.example.anjphotobox
 
 import android.os.Bundle
@@ -166,4 +167,31 @@ class DashboardActivity : AppCompatActivity() {
     }
 }
 
-#
+#Explicit Intent
+
+✔ SUDAH ADA
+
+Di kode kamu:
+
+val intent = Intent(this, DashboardActivity::class.java)
+startActivity(intent)
+
+👉 Ini namanya Explicit Intent (pindah ke activity tertentu)
+
+👉 ✅ TERPENUHI
+
+#Implicit Intent
+
+✔ SUDAH ADA
+
+Di bagian lupa password:
+
+val intent = Intent(Intent.ACTION_SENDTO)
+intent.data = Uri.parse("mailto:admin@anjphotobox.com")
+startActivity(intent)
+
+👉 Ini membuka aplikasi email → Implicit Intent
+
+👉 ✅ TERPENUHI
+
+
