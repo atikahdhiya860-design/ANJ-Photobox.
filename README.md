@@ -1,7 +1,22 @@
 # ANJ-Photobox.
-Tugas 3-Kelompok 8_L0324007_L0324028_L0324034
+Tugas 3-Kelompok 8
+Nama :
+1. Atikah Dhiya-L0324007
+2. Nadiva Meiliya-L0324028
+3. Sulthanah Jihan Zyarifah-L0324034
 
-#MainActivity.kt
+
+
+**## Deskripsi**
+
+Project ini merupakan hasil praktikum Pemrograman Mobile minggu ke-3 yang berfokus pada implementasi Activity dan Intent dalam pengembangan aplikasi Android.
+
+Aplikasi yang dibuat memiliki fitur utama berupa halaman login yang memungkinkan pengguna untuk memasukkan email dan password. Setelah data diisi dengan benar, pengguna akan diarahkan ke halaman dashboard menggunakan Explicit Intent. Selain itu, terdapat fitur “Lupa Password” yang memanfaatkan Implicit Intent untuk membuka aplikasi email dan menghubungi admin.
+
+Melalui project ini, diharapkan mahasiswa dapat memahami konsep dasar navigasi antar activity serta komunikasi antar aplikasi dalam Android secara sederhana dan terstruktur.
+
+**## Fitur**
+**1. Halaman Login (MainActivity)**
 
 package com.example.anjphotobox
 
@@ -55,105 +70,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
     }
+    
+**2. Halaman Dashboard (DashboardActivity)**
 
-#activity_main.xml
-    <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F5F5F5"
-    android:padding="24dp">
-
-    <!-- Judul -->
-    <TextView
-        android:text="ANJ Photobox 📸"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="40dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- Card Login -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:background="#FFFFFF"
-        android:elevation="6dp">
-
-        <!-- Email -->
-        <EditText
-            android:id="@+id/etEmail"
-            android:hint="Masukkan Gmail"
-            android:inputType="textEmailAddress"
-            android:padding="12dp"
-            android:background="#EEEEEE"
-            android:layout_marginBottom="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- Password -->
-        <EditText
-            android:id="@+id/etPassword"
-            android:hint="Masukkan Password"
-            android:inputType="textPassword"
-            android:padding="12dp"
-            android:background="#EEEEEE"
-            android:layout_marginBottom="24dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- Tombol Login -->
-        <Button
-            android:id="@+id/btnLogin"
-            android:text="LOGIN"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:backgroundTint="#000000"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
-        <TextView
-            android:id="@+id/tvLupaPassword"
-            android:text="Lupa Password?"
-            android:textColor="#0000FF"
-            android:textSize="14sp"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-</LinearLayout>
-
-#dashboard_activity.xml
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:background="#F5F5F5">
-
-    <TextView
-        android:text="Selamat Datang di ANJ Photobox 📸"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-</LinearLayout>
-
-#DashboardActivity.kt
 package com.example.anjphotobox
 
 import android.os.Bundle
@@ -167,31 +88,22 @@ class DashboardActivity : AppCompatActivity() {
     }
 }
 
-#Explicit Intent
+**3. Explicit Intent (pindah halaman)**
 
-✔ SUDAH ADA
+// 👉 PINDAH HALAMAN (Explicit Intent)
+                    
+                    val intent = Intent(this, DashboardActivity::class.java)
+                    startActivity(intent)
 
-Di kode kamu:
+**4. Implicit Intent (kirim email)**
 
-val intent = Intent(this, DashboardActivity::class.java)
-startActivity(intent)
+// 📧 LUPA PASSWORD (Implicit Intent)
+            lupaPassword.setOnClickListener {
 
-👉 Ini namanya Explicit Intent (pindah ke activity tertentu)
+                val intent = Intent(Intent.ACTION_SENDTO)
+                intent.data = Uri.parse("mailto:admin@anjphotobox.com")
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Lupa Password")
+                intent.putExtra(Intent.EXTRA_TEXT, "Halo admin, saya lupa password akun saya.")
 
-👉 ✅ TERPENUHI
-
-#Implicit Intent
-
-✔ SUDAH ADA
-
-Di bagian lupa password:
-
-val intent = Intent(Intent.ACTION_SENDTO)
-intent.data = Uri.parse("mailto:admin@anjphotobox.com")
-startActivity(intent)
-
-👉 Ini membuka aplikasi email → Implicit Intent
-
-👉 ✅ TERPENUHI
-
-
+                startActivity(intent)
+                
